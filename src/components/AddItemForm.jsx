@@ -1,8 +1,10 @@
 import { useRef, useState } from 'react'
 import Button from './Button'
+import { useItemsStore } from '../stores/itemsStore'
 /* eslint-disable react/prop-types */
 
-export default function AddItemForm({ onAddItem }) {
+export default function AddItemForm() {
+  const addItem = useItemsStore((state) => state.addItem)
   const [itemText, setItemText] = useState('')
   const inputRef = useRef()
   return (
@@ -16,7 +18,7 @@ export default function AddItemForm({ onAddItem }) {
             inputRef.current.focus()
             return
           }
-          onAddItem(itemText)
+          addItem(itemText)
           setItemText('')
         }}
       >

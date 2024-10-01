@@ -2,22 +2,11 @@
 import AddItemForm from './AddItemForm'
 import ButtonGroup from './ButtonGroup'
 
-export default function Sidebar({
-  handleAddItem,
-  handleMarkAllAsComplete,
-  handleMarkAllAsIncomplete,
-  handleResetToInitial,
-  handleRemoveAllItems,
-}) {
+export default function Sidebar() {
   return (
     <aside className="sidebar">
-      <AddItemForm onAddItem={handleAddItem} />
-      <ButtonGroup
-        handleMarkAllAsComplete={handleMarkAllAsComplete}
-        handleMarkAllAsIncomplete={handleMarkAllAsIncomplete}
-        handleResetToInitial={handleResetToInitial}
-        handleRemoveAllItems={handleRemoveAllItems}
-      />
+      <AddItemForm />
+      <ButtonGroup />
     </aside>
   )
 }
