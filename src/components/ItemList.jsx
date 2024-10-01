@@ -1,8 +1,10 @@
+// ItemList.jsx
 /* eslint-disable react/prop-types */
 
 import { useState } from 'react'
 import EmptyView from './EmptyView'
 import Select from 'react-select'
+import { useItemsStore } from '../stores/itemsStore'
 
 const sortingOptions = [
   {
@@ -19,12 +21,12 @@ const sortingOptions = [
   },
 ]
 
-export default function ItemList({
-  items,
-  totalNumberOfItems,
-  handleDeleteItem,
-  handleToggleItem,
-}) {
+export default function ItemList() {
+  const items = useItemsStore((state) => state.items)
+  const deleteItem = useItemsStore((state) => state.deleteItem)
+  const toggleItem = useItemsStore((state) => state.toggleItem)
+  const totalNumberOfItems = items.length
+
   const [sortBy, setSortBy] = useState('default')
 
   const sortedItems = [...items].sort((a, b) => {
@@ -36,8 +38,9 @@ export default function ItemList({
       return a.packed - b.packed
     }
 
-    return
+    return 0
   })
+
   return (
     <ul className="item-list">
       {!totalNumberOfItems && <EmptyView />}
@@ -56,8 +59,8 @@ export default function ItemList({
         <Item
           key={item.id}
           item={item}
-          onDeleteItem={handleDeleteItem}
-          onToggleItem={handleToggleItem}
+          onDeleteItem={deleteItem}
+          onToggleItem={toggleItem}
         />
       ))}
     </ul>

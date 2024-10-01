@@ -1,28 +1,31 @@
 /* eslint-disable react/prop-types */
+import { useItemsStore } from '../stores/itemsStore'
 import Button from './Button'
 
-export default function ButtonGroup({
-  handleMarkAllAsComplete,
-  handleMarkAllAsIncomplete,
-  handleResetToInitial,
-  handleRemoveAllItems,
-}) {
+export default function ButtonGroup() {
+  const markAllAsComplete = useItemsStore((state) => state.markAllAsComplete)
+  const markAllAsIncomplete = useItemsStore(
+    (state) => state.markAllAsIncomplete
+  )
+  const resetToInitial = useItemsStore((state) => state.resetToInitial)
+  const removeAllItems = useItemsStore((state) => state.removeAllItems)
+
   const secondaryButtons = [
     {
       text: 'Mark all as complete',
-      action: handleMarkAllAsComplete,
+      action: markAllAsComplete,
     },
     {
       text: 'Mark all as incomplete',
-      action: handleMarkAllAsIncomplete,
+      action: markAllAsIncomplete,
     },
     {
       text: 'Rest to initial',
-      action: handleResetToInitial,
+      action: resetToInitial,
     },
     {
       text: 'Remove all items',
-      action: handleRemoveAllItems,
+      action: removeAllItems,
     },
   ]
   return (
