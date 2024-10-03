@@ -16,9 +16,7 @@ export const useItemsStore = create(
     },
     deleteItem: (id) => {
       set((state) => {
-        const newItem = state.items.map((item) =>
-          item.id === id ? { ...item, packed: !item.packed } : item
-        )
+        const newItem = state.items.filter((item) => item.id !== id)
         return { items: newItem }
       })
     },

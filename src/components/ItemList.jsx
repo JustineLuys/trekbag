@@ -1,7 +1,7 @@
 // ItemList.jsx
 /* eslint-disable react/prop-types */
 
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import EmptyView from './EmptyView'
 import Select from 'react-select'
 import { useItemsStore } from '../stores/itemsStore'
@@ -29,17 +29,21 @@ export default function ItemList() {
 
   const [sortBy, setSortBy] = useState('default')
 
-  const sortedItems = [...items].sort((a, b) => {
-    if (sortBy === 'packed') {
-      return b.packed - a.packed
-    }
+  const sortedItems = useMemo(
+    () =>
+      [...items].sort((a, b) => {
+        if (sortBy === 'packed') {
+          return b.packed - a.packed
+        }
 
-    if (sortBy === 'unpacked') {
-      return a.packed - b.packed
-    }
+        if (sortBy === 'unpacked') {
+          return a.packed - b.packed
+        }
 
-    return 0
-  })
+        return 0
+      }),
+    [sortBy, items]
+  )
 
   return (
     <ul className="item-list">
